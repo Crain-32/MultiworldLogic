@@ -213,7 +213,7 @@ class World:
             dungeon_name = "TOTG"
         return list(
                 filter(
-                    (lambda loc: dungeon_name in loc.name),
+                    (lambda loc: dungeon_name in loc.name and "SunkenTreasure" not in loc.name),
                     self.location_entries)
                 )
 
