@@ -123,9 +123,9 @@ class World:
             self._replace_macro_item(f"Chart for Island {sector + 1}", Requirement(REQUIREMENT_HAS_ITEM, [chart]))
 
     def determine_progression_locations(self):
-        self.location_entries = self.determine_progression_locations_from_list(self.location_entries)
+        self.location_entries = self.make_progression_locations_from_list(self.location_entries)
 
-    def determine_progression_locations_from_list(self, location_list: list[Location])-> list[Location]:
+    def make_progression_locations_from_list(self, location_list: list[Location])-> list[Location]:
         return list(
                     map(
                         (lambda logical: logical.make_logical()),
@@ -138,6 +138,18 @@ class World:
                          )
                     )
                 )
+
+    def determine_progression_locations_from_list(self, location_list: list[Location])-> list[Location]:
+        return list(
+                filter(
+                  (lambda progressive:
+                    World.location_category_cache(self._location_category_list(),
+                                                progressive.category_set)
+                    ),
+                    location_list
+                    )
+                )
+
 
     def determine_race_mode_dungeons(self, random_state: Random):
         if self.world_settings.race_mode:
@@ -272,8 +284,7 @@ class World:
     def _set_dungeon_non_progressive(self, dungeon_name: str) -> None:
         location_entries = list()
         for location in self.location_entries:
-            if dungeon_name in location.name:
-                location.logical = False
+            location.logical = not dungeon_name in location.name
             location_entries.append(location)
         self.location_entries = location_entries
 
