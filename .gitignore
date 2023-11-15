@@ -1,8 +1,6 @@
 .idea/
 *.svg
 *.dot
-
-/logic/main.py.pclprof
-/logic/dump/
-*/__pycache__/
 /test/
+/target
+/Cargo.lock
