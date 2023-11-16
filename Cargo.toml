@@ -9,4 +9,6 @@ petgraph = "0.6.4"
 bitvec = "~1.0.1"
 cargo-expand = "1.0.74"
 derive_more = "0.99.17"
-
+serde = "1.0.192"
+serde_json = { version = "1.0.108", features = [] }
+serde_yaml = "0.9.27"
