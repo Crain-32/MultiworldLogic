@@ -22,7 +22,7 @@ pub mod world {
 
     pub struct Location {
         name: str,
-        category_set: HashSet<str>,
+        category_set: HashSet<str>, // Could probably just u32 this
         area_name: str,
         requirement: Requirement,
         current_item: Item,
