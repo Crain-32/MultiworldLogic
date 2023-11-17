@@ -2,6 +2,9 @@ mod world;
 mod requirements;
 mod alias;
 mod file;
+mod search;
+mod fill;
+mod extra;
 
 pub fn add(left: usize, right: usize) -> usize {
     left + right
