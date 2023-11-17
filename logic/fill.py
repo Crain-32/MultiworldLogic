@@ -179,7 +179,7 @@ def assumed_fill(worlds: list[World], logical_items: list[GameItem], logical_loc
 
             if len(accessible_locations) == 0:
                 print(f"No Accessible Locations to place {next_item}. Remaining Attempts this cycle: {retries}")
-                # Current broken seeds don't seem to  call this, so I'm woried yet.
+                # Current broken seeds don't seem to  call this, so I'm worried yet.
                 for location in logical_locations:
                     worlds[location.world_id].area_entries[location.area_name].locations.remove(location)
                     if location.current_item.game_item_id != item_id_dict["Nothing"]:

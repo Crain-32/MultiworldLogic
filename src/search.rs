@@ -1,5 +1,5 @@
 pub mod search {
-    use crate::alias::alias::{Requirement, State};
+    use crate::alias::alias::{Item, Requirement};
     use crate::world::world::{Area, Exit, Location, World};
 
     pub fn evaluate_requirement(
@@ -9,7 +9,7 @@ pub mod search {
     }
 
     pub fn explore(
-        worlds: Vec<World>, items: Vec<State>,
+        worlds: Vec<World>, items: Vec<Item>,
         area: Area, exits_to_try: Vec<Exit>,
         locations_to_try: Vec<Location>,
     ) -> Vec<Location> {
@@ -18,14 +18,14 @@ pub mod search {
 
     pub fn search(
         search_mode: String, worlds: Vec<World>,
-        input_items: Vec<State>, world_id: u8,
+        input_items: Vec<Item>, world_id: i16,
     ) -> Vec<Location> {
         todo!()
     }
 
     pub fn get_accessible_location(
-        worlds: Vec<World>, assumed_items: Vec<State>,
-        allowed_locations: Vec<Location>, world_to_search: u8,
+        worlds: &Vec<World>, assumed_items: &Vec<Item>,
+        allowed_locations: &Vec<Location>, world_to_search: i16,
     ) -> Vec<Location> {
         todo!()
     }
@@ -49,7 +49,7 @@ pub mod search {
     }
 
     pub fn locations_reachable(
-        worlds: Vec<World>, items: Vec<State>,
+        worlds: Vec<World>, items: Vec<Item>,
         locations_to_check: Vec<Location>, world_to_search: u8,
     ) -> bool {
         todo!()

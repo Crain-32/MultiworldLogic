@@ -12,3 +12,4 @@ derive_more = "0.99.17"
 serde = "1.0.192"
 serde_json = { version = "1.0.108", features = [] }
 serde_yaml = "0.9.27"
+log = "0.4.20"
