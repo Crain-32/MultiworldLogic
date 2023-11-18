@@ -49,6 +49,8 @@ Mappings:
     - Can Access Item Location "Outset Island - Savage Labyrinth - Floor 30": 3453
   Items:
     - DRC Small Key: 0x000010000
+  Flags:
+    - Ganon's Castle Trials: 0x001000
 
 PresetLocations:
   - Location_Str: Item_ID
@@ -62,4 +64,25 @@ Settings:
       - ET
     Specific:
       - 123
+  Flags:
+    - 0x001000: # Bit Index
+       Types: 0x0011000 # Settings required to care about this
+       type: number
+       min: 0
+       max: 6
+    - 0x010000:
+        Types: 0x0011000 # Settings required to care about this
+        type: boolean
+    - 0x100000:
+        Types: 0x0011000 # Settings required to care about this
+        # Trade Sequence
+        type: range
+        options:
+          - FASEF
+          - AFAEFA
+          - AEFAEFA
+          - Cuckoo
+# Review Flag collisions and propagating
+# Can we propagate by Region?
+       
 ```

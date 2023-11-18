@@ -5,26 +5,8 @@ use crate::world::{Location, World};
 
 // Basically this entire module gets nuked by the linear scan change.
 
-pub fn explore(
-    worlds: Vec<World>, items: Vec<Item>,
-    area: Area, exits_to_try: Vec<Exit>,
-    locations_to_try: Vec<Location>,
-) -> Vec<Location> {
-    // This also gets changed when we move to a linear scan
-    todo!()
-}
-
-pub fn search(
-    search_mode: String, worlds: Vec<World>,
-    input_items: Vec<Item>, world_id: usize, global_search: bool
-) -> Vec<Location> {
-    // Another Linear scanning thing getting nuked.
-    todo!()
-}
-
 pub fn get_accessible_location(
-    worlds: &Vec<World>, assumed_items: &Vec<Item>,
-    allowed_locations: &Vec<Location>, world_to_search: usize, global_search: bool
+    worlds: &Vec<World>, world_to_search: usize, global_search: bool,
 ) -> Vec<Location> {
     todo!()
 }
@@ -49,7 +31,7 @@ pub fn generate_playthrough(
 
 pub fn locations_reachable(
     worlds: Vec<World>, items: Vec<Item>,
-    locations_to_check: Vec<Location>, world_to_search: usize, global_search: bool
+    locations_to_check: Vec<Location>, world_to_search: usize, global_search: bool,
 ) -> bool {
     todo!()
 }
