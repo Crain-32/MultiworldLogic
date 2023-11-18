@@ -1,3 +1,4 @@
+use std::collections::BTreeMap;
 use std::iter::Map;
 
 use bitvec::vec::BitVec;
@@ -15,10 +16,10 @@ pub struct Location {
 #[derive(Debug)]
 pub struct World {
     pub world_id: usize,
-    item_pool: Vec<Item>,
-    pub locations: Map<Requirement, Vec<Location>>,
-    pub player_state: State,
-    pub count_state: Map<Item, usize>
+    pub item_pool: Vec<Item>,
+    pub available_locations: Vec<Location>,
+    pub locked_locations: BTreeMap<Requirement, Vec<Location>>,
+    pub player_state: State
 }
 
 // To Generate Playthrough crap.
@@ -28,7 +29,7 @@ pub struct MetaData {
     access_mapping: Vec<Vec<usize>>,
     // Indexed by Location Id
     region: Vec<usize>, // Region by Location Id
-    items: Map<BitVec, BitVec>,
+    items: BTreeMap<BitVec, BitVec>,
     location_name: Vec<String>,
     // Indexed by Location Id
     settings: Vec<String>,

@@ -1,6 +1,6 @@
 use bitvec::vec::BitVec;
 
-use crate::alias::Item;
+use crate::alias::{Item, satisfies};
 use crate::world::{Location, World};
 
 // evaluate_requirement moved to the requirement crate
@@ -17,9 +17,17 @@ pub fn get_accessible_location(
     }
 }
 
-fn check_single_world(world: World) -> Vec<Location> {
-    let mut world_state = world.player_state.clone();
-    let mut count_state = world.count_state.clone();
+fn check_single_world(mut world: World) -> Vec<Location> {
+    // Scan all available locations
+    for requirement_to_check in world.locked_locations {
+        if !satisfies(requirement_to_check.0, world.player_state) {
+            continue;
+        }
+        match world.locked_locations.remove(&requirement_to_check.0) {
+            None => { panic!("This should never be reached so this is bad")}
+            Some(mut locations_to_add) => {world.available_locations.append(&mut locations_to_add)}
+        }
+    }
 
     return todo!();
 }

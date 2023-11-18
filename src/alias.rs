@@ -1,5 +1,7 @@
+use std::collections::BTreeMap;
+
 use bitvec::prelude::BitVec;
-use derive_more::{Deref, DerefMut, Display};
+use derive_more::Display;
 
 #[derive(Debug, Clone, Default)]
 pub struct Item {
@@ -23,15 +25,30 @@ pub struct Item {
 //     }
 // }
 
-#[derive(Deref, DerefMut)]
 #[derive(Debug, Display, Clone)]
-#[deref(forward)]
-pub struct State(BitVec);
+pub struct State {
+    state: BitVec,
+    item_count: BTreeMap<BitVec, usize>,
+}
 
 #[derive(Debug, Clone, Default, Display)]
 pub struct Requirement {
     requirement: BitVec,
-    needs_count: Option<usize>,
-    item: BitVec,
+    needs_count: Option<(BitVec, usize)>,
+}
+
+pub fn satisfies(requirement: Requirement, state: State) -> bool {
+    return match requirement.needs_count {
+        None => { bitvec_satisfies(requirement.requirement, state.state) }
+        Some(count_req) => {
+            bitvec_satisfies(requirement.requirement, state.state) &
+                (state.item_count.get(&*count_req.0).unwrap() == count_req.1)
+        }
+    };
+}
+
+fn bitvec_satisfies(first: BitVec, second: BitVec) -> bool {
+    let mut value = first.clone();
+    return ((value ^ second) & first) == 0;
 }
 
