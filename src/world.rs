@@ -4,7 +4,7 @@ use bitvec::vec::BitVec;
 
 use crate::alias::{Item, Requirement, State};
 
-pub type LocationId = u64;
+pub type LocationId = usize;
 
 #[derive(Debug, Clone, Default)]
 pub struct Location {
@@ -14,20 +14,20 @@ pub struct Location {
 
 #[derive(Debug)]
 pub struct World {
-    world_id: usize,
+    pub world_id: usize,
     item_pool: Vec<Item>,
-    locations: (Requirement, Vec<Location>),
-    // Handle by Index
-    player_state: State,
+    pub locations: Map<Requirement, Vec<Location>>,
+    pub player_state: State,
+    pub count_state: Map<Item, usize>
 }
 
 // To Generate Playthrough crap.
 #[derive(Debug)]
 pub struct MetaData {
     world_id: usize,
-    access_mapping: Vec<Vec<u64>>,
+    access_mapping: Vec<Vec<usize>>,
     // Indexed by Location Id
-    region: Vec<u64>, // Region by Location Id
+    region: Vec<usize>, // Region by Location Id
     items: Map<BitVec, BitVec>,
     location_name: Vec<String>,
     // Indexed by Location Id

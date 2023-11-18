@@ -1,3 +1,5 @@
+use bitvec::vec::BitVec;
+
 use crate::alias::Item;
 use crate::world::{Location, World};
 
@@ -8,6 +10,21 @@ use crate::world::{Location, World};
 pub fn get_accessible_location(
     worlds: &Vec<World>, world_to_search: usize, global_search: bool,
 ) -> Vec<Location> {
+    if global_search {
+        return check_multiworld(worlds);
+    } else {
+        return worlds.get(world_to_search).map(check_single_world).unwrap();
+    }
+}
+
+fn check_single_world(world: World) -> Vec<Location> {
+    let mut world_state = world.player_state.clone();
+    let mut count_state = world.count_state.clone();
+
+    return todo!();
+}
+
+fn check_multiworld(worlds: &Vec<World>) -> Vec<Location> {
     todo!()
 }
 

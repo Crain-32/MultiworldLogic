@@ -4,6 +4,7 @@ use derive_more::{Deref, DerefMut, Display};
 #[derive(Debug, Clone, Default)]
 pub struct Item {
     pub value: BitVec,
+    pub is_count: bool,
     pub world_id: usize,
 }
 
@@ -23,14 +24,14 @@ pub struct Item {
 // }
 
 #[derive(Deref, DerefMut)]
-#[derive(Debug, Display)]
+#[derive(Debug, Display, Clone)]
 #[deref(forward)]
 pub struct State(BitVec);
 
-#[derive(Deref, DerefMut)]
 #[derive(Debug, Clone, Default, Display)]
-#[deref(forward)]
-pub struct Requirement(BitVec);
-
-
+pub struct Requirement {
+    requirement: BitVec,
+    needs_count: Option<usize>,
+    item: BitVec,
+}
 
