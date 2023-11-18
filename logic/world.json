@@ -9236,7 +9236,7 @@
                     "ConnectedArea": "GanonsTowerSpire",
                     "Needs": {
                         "type": "and", "args": [
-                            { "type": "has_item", "args": ["Boomerang"]},
+                            { "type": "has_item", "args": "Boomerang"},
                             { "type": "has_item", "args": ["Hookshot"]},
                             { "type": "has_item", "args": ["GrapplingHook"]},
                             { "type": "macro", "args": ["Light Arrows"]}

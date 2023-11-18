@@ -1,11 +1,65 @@
-## Logic Port for TWWR Multiworld ##
+## Logic Optimization for Multiworld ##
 
-The following Repository is exclusively the expected logic for the Multiworld version of The Wind Waker Randomizer.
-You can run the logic by running `main.py`
+Note, Race Mode is Plando with Extra Steps
 
+### Input
+```yaml
+Locations:
+- 123: # Outset Island - Savage Labyrinth - Floor 50
+  Need:
+    - 0x20000002341213
+    - 0x00000000234221
+  Count:
+    - 0x000010000: # Item Id or Index
+      needed: 2
+  AccessPoints:
+    - 3453
+  Category:
+    - 1 # Savage
+    - 2
+  Region:
+    Specific:
+      125 # ET Miniboss
+    Connected: # Can be randomized to a different location
+      False
 
-### Helper Scripts ###
-`simple_world_locations.py`
-This will take a world dump made by `dump_object()` and simplify it. Add in any character after the file location in order to reduce it further 
+Region:
+  ET:
+    - 123 # Basement
+    - 124 # Left Side
+    - 125 # Miniboss
+    - 126 # Boss
+AccessMacros:
+  - 3453:
+    Need:
+      - 0x12341231
+  - 3454:
+    Need:
+      - 0x10123111
+Items:
+  - 0x000010000: # DRC Small Key
+      Types: 0x0100001 # Dungeons, Tingle Chest
+      Regions: 
+        - 120 # If needed in Region 100%, if region not in total logic, it is not a required item.
+      Count: 4
 
-`world_items_count.py` This can take a world dump made by `dump_object()` and get a count of every item in the world. Add in any character after the file location in order to remove all items you have Zero of.
+Mappings:
+  Locations:
+    - Outset Island - Savage Labyrinth - Floor 50: 123
+    - Can Access Item Location "Outset Island - Savage Labyrinth - Floor 30": 3453
+  Items:
+    - DRC Small Key: 0x000010000
+
+PresetLocations:
+  - Location_Str: Item_ID
+  - Gohma Heart Container: 0x01000
+
+Settings:
+  - Value_One
+  - Value_Two
+  BannedRegions:
+    General:
+      - ET
+    Specific:
+      - 123
+```
