@@ -1,20 +1,27 @@
 use serde::Deserialize;
 
-use crate::alias::{Item, Requirement, State};
+use crate::alias::Requirement;
 
 // Likely doesn't Deserialize Correctly
 #[derive(Deserialize, Debug, Clone, Eq, PartialEq)]
 #[serde(tag = "type", content = "args")]
 #[serde(rename_all = "snake_case")]
 pub enum ReqType {
-    Or(Vec<ReqType>), // NODE
-    And(Vec<ReqType>), // NODE
-    HasItem(String), // Leaf
-    Count(u8, String), // (Complex) Leaf
-    CanAccess(String), // NODE
-    Setting(String), // "Leaf" | Static, Part of the BitVec Header/World State Header Or Item State
-    Macro(String, Box<ReqType>), // NODE Non-Special Case
-    Not(String)
+    Or(Vec<ReqType>),
+    // NODE
+    And(Vec<ReqType>),
+    // NODE
+    HasItem(String),
+    // Leaf
+    Count(u8, String),
+    // (Complex) Leaf
+    CanAccess(String),
+    // NODE
+    Setting(String),
+    // "Leaf" | Static, Part of the BitVec Header/World State Header Or Item State
+    Macro(String, Box<ReqType>),
+    // NODE Non-Special Case
+    Not(String),
 }
 
 /// 0b1000101010010100
@@ -88,15 +95,6 @@ pub enum ReqType {
 /// Precompile World and Macro (Fast and Cool)
 ///
 
-
-
-fn evaluate_requirement(requirement: Requirement, state: State) -> bool {
-    return requirement.contains(&state);
-}
-
-fn needs_item(requirement: Requirement, item: Item) -> bool {
-    return requirement.contains(&item.value);
-}
 
 /// Applies `requirement_two` to `requirement_one` based on the `req_type`
 ///
